@@ -11,74 +11,95 @@
       section.classList.toggle('hidden');
     }
   </script>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  </style>
 </head>
-<body class="bg-gray-50 font-sans">
-  <main class="max-w-4xl mx-auto py-10 px-4">
-    <!-- Hero Section -->
-    <section class="bg-white p-10 rounded-2xl shadow-md text-center">
-      <h1 class="text-4xl font-bold mb-4">Army Spouse Leave Application</h1>
-      <p class="text-lg text-gray-600 mb-6">Apply professionally and securely for military spouse leave.</p>
-      <a href="#application" class="inline-block bg-blue-600 text-white py-3 px-6 rounded-xl hover:bg-blue-700">Apply Now</a>
+<body class="bg-gray-100">
+  <header class="bg-white shadow-md py-6 mb-10">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="text-3xl font-bold text-gray-800">Army Spouse Leave Application</h1>
+      <p class="text-gray-500 mt-1">Secure your spouse leave request with professionalism</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4">
+    <!-- Hero Banner -->
+    <section class="bg-blue-600 text-white text-center rounded-2xl p-10 shadow-lg mb-10">
+      <h2 class="text-4xl font-bold mb-4">Apply with Confidence</h2>
+      <p class="text-lg mb-6">We simplify the process for you and your military spouse.</p>
+      <a href="#application" class="bg-white text-blue-600 font-semibold py-2 px-6 rounded-lg hover:bg-gray-100 transition">Start Application</a>
     </section>
 
-    <!-- Expandable Info Cards -->
-    <section class="mt-12 grid gap-6">
+    <!-- Accordion Section -->
+    <section class="space-y-6">
       <!-- Requirements -->
-      <div onclick="toggleSection('req')" class="cursor-pointer bg-white p-6 rounded-xl shadow hover:shadow-lg">
-        <h2 class="text-xl font-semibold mb-2">Requirements</h2>
-        <p class="text-gray-600">Click to view eligibility rules and required documents.</p>
+      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('req')">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-semibold text-gray-800">Requirements</h3>
+          <span class="text-blue-600">Click to expand</span>
+        </div>
         <div id="req" class="hidden mt-4 text-gray-700">
-          <ul class="list-disc ml-5">
-            <li>Applicant must be the legal spouse of an active-duty military member.</li>
-            <li>Provide proof of marriage (certificate).</li>
-            <li>Military ID or service verification of spouse.</li>
-            <li>Reason for leave and supporting details.</li>
+          <ul class="list-disc ml-5 space-y-1">
+            <li>Legal spouse of active-duty personnel</li>
+            <li>Proof of marriage (e.g., marriage certificate)</li>
+            <li>Military ID or spouse’s service verification</li>
+            <li>Reason and details of leave request</li>
           </ul>
         </div>
       </div>
 
       <!-- Pricing -->
-      <div onclick="toggleSection('price')" class="cursor-pointer bg-white p-6 rounded-xl shadow hover:shadow-lg">
-        <h2 class="text-xl font-semibold mb-2">Pricing</h2>
-        <p class="text-gray-600">Click to view our flat service fee.</p>
+      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('price')">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-semibold text-gray-800">Pricing</h3>
+          <span class="text-blue-600">Click to expand</span>
+        </div>
         <div id="price" class="hidden mt-4 text-gray-700">
-          <p>The total cost for application review, support, and documentation is <strong>$195</strong>.</p>
-          <p>This covers personalized guidance and processing via secure channels.</p>
+          <p class="mb-2">Our flat-rate processing fee is <strong>$195</strong>, which includes:</p>
+          <ul class="list-disc ml-5 space-y-1">
+            <li>Document review and compliance check</li>
+            <li>Application submission and guidance</li>
+            <li>Secure support and follow-up</li>
+          </ul>
         </div>
       </div>
 
       <!-- Guide -->
-      <div onclick="toggleSection('guide')" class="cursor-pointer bg-white p-6 rounded-xl shadow hover:shadow-lg">
-        <h2 class="text-xl font-semibold mb-2">Application Guide</h2>
-        <p class="text-gray-600">Click to view application steps.</p>
+      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('guide')">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-semibold text-gray-800">Application Guide</h3>
+          <span class="text-blue-600">Click to expand</span>
+        </div>
         <div id="guide" class="hidden mt-4 text-gray-700">
-          <ol class="list-decimal ml-5">
-            <li>Fill out the online application form completely.</li>
-            <li>Upload required documents (passport, certificate, ID).</li>
-            <li>Submit payment and wait for confirmation email.</li>
-            <li>Receive processing updates within 3–5 business days.</li>
+          <ol class="list-decimal ml-5 space-y-1">
+            <li>Complete the form with accurate details</li>
+            <li>Upload necessary documents (passport, certificate)</li>
+            <li>Submit payment for processing</li>
+            <li>Receive confirmation and support within 3–5 business days</li>
           </ol>
         </div>
       </div>
     </section>
 
     <!-- Application Form -->
-    <section id="application" class="mt-16 bg-white p-6 rounded-2xl shadow-md">
-      <h2 class="text-2xl font-bold mb-4">Application Form</h2>
+    <section id="application" class="mt-16 bg-white p-8 rounded-2xl shadow-md">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">Application Form</h2>
       <form class="grid gap-4">
-        <input class="p-2 border rounded" type="text" placeholder="Your Full Name" required />
-        <input class="p-2 border rounded" type="email" placeholder="Email Address" required />
-        <input class="p-2 border rounded" type="text" placeholder="Spouse’s Military Rank" required />
-        <textarea class="p-2 border rounded" placeholder="Reason for Leave" required></textarea>
-        <input class="p-2" type="file" accept=".pdf,.jpg,.png" required />
-        <button type="submit" class="bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Submit Application</button>
+        <input class="p-3 border border-gray-300 rounded-lg" type="text" placeholder="Your Full Name" required />
+        <input class="p-3 border border-gray-300 rounded-lg" type="email" placeholder="Email Address" required />
+        <input class="p-3 border border-gray-300 rounded-lg" type="text" placeholder="Spouse’s Military Rank" required />
+        <textarea class="p-3 border border-gray-300 rounded-lg" placeholder="Reason for Leave" rows="4" required></textarea>
+        <input class="p-3" type="file" accept=".pdf,.jpg,.png" required />
+        <button type="submit" class="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition">Submit Application</button>
       </form>
     </section>
 
-    <!-- Contact -->
+    <!-- Contact Section -->
     <section class="mt-16 bg-white p-6 rounded-2xl shadow-md mb-10 text-center">
-      <h2 class="text-2xl font-bold mb-4">Need Help?</h2>
-      <p class="text-gray-600">Email: support@militaryleave.com | Phone: +1 800-555-1234</p>
+      <h2 class="text-2xl font-bold text-gray-800 mb-3">Need Help?</h2>
+      <p class="text-gray-600">Email us at <a href="mailto:support@militaryleave.com" class="text-blue-600 hover:underline">support@militaryleave.com</a></p>
+      <p class="text-gray-600">Or call: +1 (800) 555-1234</p>
       <a href="mailto:support@militaryleave.com" class="inline-block mt-4 bg-blue-600 text-white py-2 px-6 rounded-xl hover:bg-blue-700">Contact Support</a>
     </section>
   </main>
