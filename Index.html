@@ -1,0 +1,100 @@
+// Single-page React site with expandable sections (accordion-style)
+// Uses local state to toggle visibility of Requirements, Pricing, and Guide
+
+import React, { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+export default function HomePage() {
+  const [openSection, setOpenSection] = useState("");
+
+  const toggleSection = (section) => {
+    setOpenSection(openSection === section ? "" : section);
+  };
+
+  return (
+    <main className="min-h-screen bg-gray-50 p-4">
+      {/* Hero */}
+      <section className="text-center py-16 bg-white shadow-md rounded-2xl">
+        <h1 className="text-4xl font-bold mb-4">Army Spouse Leave Application</h1>
+        <p className="text-lg text-gray-600 mb-6">Apply professionally and securely for military spouse leave.</p>
+        <a href="#apply">
+          <Button className="text-lg px-6 py-3">Apply Now</Button>
+        </a>
+      </section>
+
+      {/* Accordion Section */}
+      <section className="grid gap-6 mt-10">
+        {/* Requirements */}
+        <Card className="cursor-pointer hover:shadow-lg transition" onClick={() => toggleSection("requirements")}>  
+          <CardContent className="p-6">
+            <h2 className="text-xl font-semibold mb-2">Requirements</h2>
+            <p className="text-gray-600">Click to view eligibility rules and required documents.</p>
+            {openSection === "requirements" && (
+              <div className="mt-4 text-gray-700">
+                <ul className="list-disc ml-5">
+                  <li>Applicant must be the legal spouse of an active-duty military member.</li>
+                  <li>Provide proof of marriage (certificate).</li>
+                  <li>Military ID or service verification of spouse.</li>
+                  <li>Reason for leave and supporting details.</li>
+                </ul>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Pricing */}
+        <Card className="cursor-pointer hover:shadow-lg transition" onClick={() => toggleSection("pricing")}>  
+          <CardContent className="p-6">
+            <h2 className="text-xl font-semibold mb-2">Pricing</h2>
+            <p className="text-gray-600">Click to view our flat service fee.</p>
+            {openSection === "pricing" && (
+              <div className="mt-4 text-gray-700">
+                <p>The total cost for application review, support, and documentation is <strong>$195</strong>.</p>
+                <p>This covers personalized guidance and processing via secure channels.</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Guide */}
+        <Card className="cursor-pointer hover:shadow-lg transition" onClick={() => toggleSection("guide")}>  
+          <CardContent className="p-6">
+            <h2 className="text-xl font-semibold mb-2">Application Guide</h2>
+            <p className="text-gray-600">Click to view application steps.</p>
+            {openSection === "guide" && (
+              <div className="mt-4 text-gray-700">
+                <ol className="list-decimal ml-5">
+                  <li>Fill out the online application form completely.</li>
+                  <li>Upload required documents (passport, certificate, ID).</li>
+                  <li>Submit payment and wait for confirmation email.</li>
+                  <li>Receive processing updates within 3–5 business days.</li>
+                </ol>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Application Form */}
+      <section id="apply" className="mt-16 bg-white p-6 rounded-2xl shadow-md">
+        <h2 className="text-2xl font-bold mb-4">Application Form</h2>
+        <form className="grid gap-4">
+          <input className="p-2 border rounded" placeholder="Your Full Name" required />
+          <input className="p-2 border rounded" type="email" placeholder="Email Address" required />
+          <input className="p-2 border rounded" placeholder="Spouse’s Military Rank" required />
+          <textarea className="p-2 border rounded" placeholder="Reason for Leave" required />
+          <input className="p-2" type="file" accept=".pdf,.jpg,.png" required />
+          <Button type="submit">Submit Application</Button>
+        </form>
+      </section>
+
+      {/* Contact */}
+      <section className="mt-16 bg-white p-6 rounded-2xl shadow-md mb-10">
+        <h2 className="text-2xl font-bold mb-4">Need Help?</h2>
+        <p className="text-gray-600">Email: support@militaryleave.com | Phone: +1 800-555-1234</p>
+        <Button className="mt-4">Contact Support</Button>
+      </section>
+    </main>
+  );
+}
