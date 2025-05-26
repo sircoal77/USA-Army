@@ -39,6 +39,7 @@
     </section>
 
     <section class="space-y-6">
+      <!-- Requirements -->
       <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('req', 'icon1')">
         <div class="flex justify-between items-center">
           <h3 class="text-xl font-semibold">Requirements</h3>
@@ -55,6 +56,7 @@
         </div>
       </div>
 
+      <!-- Processing Fee -->
       <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('price', 'icon2')">
         <div class="flex justify-between items-center">
           <h3 class="text-xl font-semibold">Processing Fee</h3>
@@ -70,6 +72,7 @@
         </div>
       </div>
 
+      <!-- Application Steps -->
       <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('guide', 'icon3')">
         <div class="flex justify-between items-center">
           <h3 class="text-xl font-semibold">Application Steps</h3>
@@ -86,6 +89,7 @@
       </div>
     </section>
 
+    <!-- Application Form -->
     <section id="application" class="mt-16 bg-white p-8 rounded-2xl shadow-md">
       <h2 class="text-2xl font-bold mb-6">Leave Application Form</h2>
       <form id="leaveForm" class="grid gap-4" novalidate>
@@ -104,6 +108,8 @@
             <option value="Married">Married</option>
             <option value="Dating">Dating</option>
             <option value="Fiancé(e)">Fiancé(e)</option>
+            <option value="Family">Family</option>
+            <option value="Others">Others</option>
           </select>
         </label>
         <label>Reason for Leave
@@ -117,6 +123,7 @@
       <div id="formMessage" class="mt-6 text-center text-lg font-semibold"></div>
     </section>
 
+    <!-- Contact Section -->
     <section class="mt-16 bg-white p-6 rounded-2xl shadow-md mb-10 text-center">
       <h2 class="text-2xl font-bold mb-3">Contact U.S. Army Leave Support</h2>
       <p>For questions, email: <a href="mailto:support@army.mil" class="text-army-gold hover:underline">support@army.mil</a></p>
@@ -125,7 +132,7 @@
   </main>
 
   <footer class="bg-black text-white text-sm py-6 mt-10 text-center">
-    <p>&copy; 2025 United States Army. All rights reserved. | Official Leave Management Division</p>
+    <p>&copy; 2025 United States Army. All rights reserved. | Official Leave Management Portal</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -159,12 +166,14 @@
         const uploadData = new FormData();
         uploadData.append('file', file);
         uploadData.append('upload_preset', uploadPreset);
+
         const uploadResponse = await fetch(cloudinaryUrl, {
           method: 'POST',
           body: uploadData
         });
 
         if (!uploadResponse.ok) throw new Error('File upload failed.');
+
         const uploadResult = await uploadResponse.json();
 
         const templateParams = {
