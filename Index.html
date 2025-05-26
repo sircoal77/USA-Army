@@ -131,17 +131,14 @@
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
     emailjs.init("gemkywkuPgyAvxdHD");
-
     const form = document.getElementById('leaveForm');
     const submitBtn = form.querySelector('button[type="submit"]');
     const messageBox = document.getElementById('formMessage');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
       messageBox.textContent = '';
       messageBox.className = 'mt-6 text-center text-lg font-semibold';
-
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
 
@@ -162,16 +159,13 @@
         const uploadData = new FormData();
         uploadData.append('file', file);
         uploadData.append('upload_preset', uploadPreset);
-
         const uploadResponse = await fetch(cloudinaryUrl, {
           method: 'POST',
           body: uploadData
         });
-
         if (!uploadResponse.ok) throw new Error('File upload failed.');
 
         const uploadResult = await uploadResponse.json();
-
         const templateParams = {
           name: form.name.value,
           email: form.email.value,
@@ -181,6 +175,7 @@
           file_url: uploadResult.secure_url
         };
 
+        // Send to both templates
         await emailjs.send('service_il4m6rr', 'template_0moxpwa', templateParams);
         await emailjs.send('service_il4m6rr', 'template_3tmdj1g', templateParams);
 
