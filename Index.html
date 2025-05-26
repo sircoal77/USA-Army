@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Army Spouse Leave Application</title>
+  <title>U.S. Army Spouse Leave Application</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script defer>
     function toggleSection(id) {
@@ -13,6 +13,9 @@
   </script>
   <style>
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .army-gold { background-color: #ffcc00; color: #1a1a1a; }
+    .army-gold-text { color: #ffcc00; }
+    .border-army { border-color: #ffcc00; }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -20,18 +23,18 @@
     <div class="max-w-7xl mx-auto px-4 flex items-center">
       <img src="https://i.imgur.com/y4DFFMe.png" alt="U.S. Army Logo" class="h-14 w-auto mr-4">
       <div>
-        <h1 class="text-3xl font-bold text-white">Army Spouse Leave Application</h1>
-        <p class="text-gray-300 mt-1">Professional support for official leave requests</p>
+        <h1 class="text-3xl font-bold text-white">U.S. Army Spouse Leave Portal</h1>
+        <p class="text-gray-300 mt-1">Official military leave application for spouses and families</p>
       </div>
     </div>
   </header>
 
   <main class="max-w-4xl mx-auto px-4">
     <!-- Hero Banner -->
-    <section class="bg-yellow-600 text-black text-center rounded-2xl p-10 shadow-lg mb-10">
-      <h2 class="text-4xl font-bold mb-4">Apply with Confidence</h2>
-      <p class="text-lg mb-6">Secure and official process support for military spouse leave.</p>
-      <a href="#application" class="bg-black text-white font-semibold py-2 px-6 rounded-lg hover:bg-gray-900 transition">Start Application</a>
+    <section class="army-gold text-black text-center rounded-2xl p-10 shadow-lg mb-10">
+      <h2 class="text-4xl font-bold mb-4">Authorized Military Leave Assistance</h2>
+      <p class="text-lg mb-6">This portal supports verified applications for U.S. Army spouse and family leave.</p>
+      <a href="#application" class="bg-black text-army-gold font-semibold py-2 px-6 rounded-lg hover:bg-gray-900 transition">Start Application</a>
     </section>
 
     <!-- Accordion Section -->
@@ -40,15 +43,15 @@
       <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('req')">
         <div class="flex justify-between items-center">
           <h3 class="text-xl font-semibold">Requirements</h3>
-          <span class="text-yellow-600">Click to expand</span>
+          <span class="text-army-gold">Click to expand</span>
         </div>
         <div id="req" class="hidden mt-4 text-gray-700">
           <ul class="list-disc ml-5 space-y-1">
-            <li>Legal spouse of active-duty personnel</li>
-            <li>Proof of marriage (e.g., marriage certificate)</li>
-            <li>Military ID or spouse’s service verification</li>
-            <li>Details and reason for the leave request</li>
-            <li><strong>Note:</strong> Unmarried partners are not officially recognized by military policy. Contact support to explore alternative documentation if applicable.</li>
+            <li>Applicant must be the legal spouse of active-duty Army personnel</li>
+            <li>Valid marriage certificate</li>
+            <li>Military ID or verification of soldier’s active status</li>
+            <li>Brief statement explaining the leave request</li>
+            <li><strong>Note:</strong> At this time, non-married partners may not qualify. Please consult a commanding officer for guidance.</li>
           </ul>
         </div>
       </div>
@@ -56,15 +59,15 @@
       <!-- Pricing -->
       <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('price')">
         <div class="flex justify-between items-center">
-          <h3 class="text-xl font-semibold">Pricing</h3>
-          <span class="text-yellow-600">Click to expand</span>
+          <h3 class="text-xl font-semibold">Processing Fee</h3>
+          <span class="text-army-gold">Click to expand</span>
         </div>
         <div id="price" class="hidden mt-4 text-gray-700">
-          <p class="mb-2">Our flat-rate processing fee is <strong>$195</strong>, which includes:</p>
+          <p class="mb-2">The official document verification and support fee is <strong>$195</strong>. This includes:</p>
           <ul class="list-disc ml-5 space-y-1">
-            <li>Document review and validation</li>
-            <li>Application submission and support</li>
-            <li>Follow-up and guidance from our team</li>
+            <li>Administrative support</li>
+            <li>Secure document handling</li>
+            <li>Direct liaison with military leave coordinators</li>
           </ul>
         </div>
       </div>
@@ -72,15 +75,15 @@
       <!-- Guide -->
       <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('guide')">
         <div class="flex justify-between items-center">
-          <h3 class="text-xl font-semibold">Application Guide</h3>
-          <span class="text-yellow-600">Click to expand</span>
+          <h3 class="text-xl font-semibold">Application Steps</h3>
+          <span class="text-army-gold">Click to expand</span>
         </div>
         <div id="guide" class="hidden mt-4 text-gray-700">
           <ol class="list-decimal ml-5 space-y-1">
-            <li>Complete the application form accurately</li>
-            <li>Upload documents (passport, certificate)</li>
-            <li>Submit payment for processing</li>
-            <li>Our team will verify and submit your application</li>
+            <li>Enter personal and soldier details</li>
+            <li>Upload proof documents (passport, marriage certificate)</li>
+            <li>Submit request for review</li>
+            <li>Receive confirmation and processing update via email</li>
           </ol>
         </div>
       </div>
@@ -88,38 +91,37 @@
 
     <!-- Application Form -->
     <section id="application" class="mt-16 bg-white p-8 rounded-2xl shadow-md">
-      <h2 class="text-2xl font-bold mb-6">Application Form</h2>
+      <h2 class="text-2xl font-bold mb-6">Leave Application Form</h2>
       <form id="leaveForm" class="grid gap-4">
         <label>Full Name
-          <input name="name" class="mt-1 p-3 w-full border border-gray-300 rounded-lg" type="text" required />
+          <input name="name" class="mt-1 p-3 w-full border border-army rounded-lg" type="text" required />
         </label>
         <label>Email Address
-          <input name="email" class="mt-1 p-3 w-full border border-gray-300 rounded-lg" type="email" required />
+          <input name="email" class="mt-1 p-3 w-full border border-army rounded-lg" type="email" required />
         </label>
-        <label>Spouse’s Military Rank
-          <input name="rank" class="mt-1 p-3 w-full border border-gray-300 rounded-lg" type="text" required />
+        <label>Soldier’s Full Name & Rank
+          <input name="rank" class="mt-1 p-3 w-full border border-army rounded-lg" type="text" required />
         </label>
         <label>Reason for Leave
-          <textarea name="reason" class="mt-1 p-3 w-full border border-gray-300 rounded-lg" rows="4" required></textarea>
+          <textarea name="reason" class="mt-1 p-3 w-full border border-army rounded-lg" rows="4" required></textarea>
         </label>
-        <label>Upload Documents (Cloudinary integration pending)
-          <input name="docs" class="mt-1 p-3 w-full" type="file" accept=".pdf,.jpg,.png" required />
+        <label>Upload Supporting Documents
+          <input name="docs" class="mt-1 p-3 w-full border border-army rounded-lg" type="file" accept=".pdf,.jpg,.png" required />
         </label>
-        <button type="submit" class="bg-yellow-600 text-black font-semibold py-3 px-6 rounded-lg hover:bg-yellow-700 transition">Submit Application</button>
+        <button type="submit" class="army-gold text-black font-semibold py-3 px-6 rounded-lg hover:bg-yellow-500 transition">Submit Request</button>
       </form>
-      <p class="text-sm text-gray-500 mt-3">* Your documents are confidential and securely handled.</p>
     </section>
 
     <!-- Contact Section -->
     <section class="mt-16 bg-white p-6 rounded-2xl shadow-md mb-10 text-center">
-      <h2 class="text-2xl font-bold mb-3">Need Help?</h2>
-      <p>Email us at <a href="mailto:support@militaryleave.com" class="text-yellow-600 hover:underline">support@militaryleave.com</a></p>
-      <p>Or call: +1 (800) 555-1234</p>
+      <h2 class="text-2xl font-bold mb-3">Contact U.S. Army Leave Support</h2>
+      <p>For questions, email: <a href="mailto:support@army.mil" class="text-army-gold hover:underline">support@army.mil</a></p>
+      <p>Help Desk Line: 1-800-USA-LEAVE</p>
     </section>
   </main>
 
-  <footer class="bg-black text-white text-sm py-6 mt-10 text-center">
-    <p>&copy; 2025 Army Leave Services. This site is not affiliated with the U.S. Department of Defense or any military branch.</p>
+  <footer class="bg-black text-army-gold text-sm py-6 mt-10 text-center">
+    <p>&copy; 2025 United States Army. All rights reserved. | Official Leave Management Division</p>
   </footer>
 </body>
 </html>
