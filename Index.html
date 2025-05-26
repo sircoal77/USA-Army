@@ -153,12 +153,14 @@
       messageBox.textContent = '';
       messageBox.className = 'mt-6 text-center text-lg font-semibold';
 
-      // Disable button & show submitting text
+      // Disable submit to prevent multiple submissions
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
 
-      const fileInput = form.querySelector('input[name="docs"]');
-      if (fileInput.files.length === 0) {
+      const formData = new FormData(form);
+      const file = formData.get('docs');
+
+      if (!file || file.size === 0) {
         messageBox.textContent = 'Please upload a supporting document.';
         messageBox.classList.add('text-red-600');
         submitBtn.disabled = false;
@@ -166,48 +168,52 @@
         return;
       }
 
-      const file = fileInput.files[0];
-
-      // Upload file to Cloudinary
-      const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/do9yjpizs/auto/upload';
-      const uploadPreset = 'unsigned_preset';
-
       try {
+        // Upload file to Cloudinary
+        const cloudName = "dsvf3zzjm";
+        const preset = "docupload";
+        const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+
         const uploadData = new FormData();
         uploadData.append('file', file);
-        uploadData.append('upload_preset', uploadPreset);
+        uploadData.append('upload_preset', preset);
 
-        const uploadResponse = await fetch(cloudinaryUrl, {
+        const response = await fetch(url, {
           method: 'POST',
           body: uploadData
         });
 
-        if (!uploadResponse.ok) throw new Error('Failed to upload the document.');
+        if (!response.ok) throw new Error('File upload failed.');
 
-        const uploadResult = await uploadResponse.json();
+        const data = await response.json();
+        const fileUrl = data.secure_url;
 
         // Prepare EmailJS params
-        const templateParams = {
-          name: form.name.value,
-          email: form.email.value,
-          rank: form.rank.value,
-          relationship: form.relationship.value,
-          reason: form.reason.value,
-          file_url: uploadResult.secure_url
+        const params = {
+          name: formData.get('name'),
+          email: formData.get('email'),
+          rank: formData.get('rank'),
+          relationship: formData.get('relationship'),
+          reason: formData.get('reason'),
+          document_url: fileUrl // Correct key for team email
         };
 
         // Send email to team
-        await emailjs.send('service_il4m6rr', 'template_0moxpwa', templateParams);
-        // Send email to applicant (optional)
-        await emailjs.send('service_il4m6rr', 'template_3tmdj1g', templateParams);
+        const teamEmail = emailjs.send("service_1lwkxpo", "template_dgqsq54", params);
 
-        messageBox.textContent = 'Your leave application has been successfully submitted. Check your email for receipt.';
-        messageBox.classList.add('text-green-600');
+        // Send confirmation email to applicant
+        const applicantEmail = emailjs.send("service_1lwkxpo", "template_5yrtvsu", params);
 
+        // Await both promises
+        await Promise.all([teamEmail, applicantEmail]);
+
+        messageBox.textContent = "Your leave request has been submitted successfully! We will contact you soon.";
+        messageBox.classList.add('text-green-700');
         form.reset();
       } catch (error) {
-        messageBox.textContent = 'Error submitting the application: ' + error.message;
+        messageBox.textContent = "There was an error submitting your request. Please try again later.";
         messageBox.classList.add('text-red-600');
+        console.error(error);
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submit Request';
