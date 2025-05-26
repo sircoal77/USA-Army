@@ -6,9 +6,11 @@
   <title>U.S. Army Spouse Leave Application</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script defer>
-    function toggleSection(id) {
+    function toggleSection(id, iconId) {
       const section = document.getElementById(id);
+      const icon = document.getElementById(iconId);
       section.classList.toggle('hidden');
+      icon.textContent = section.classList.contains('hidden') ? '\u25BC' : '\u25B2';
     }
   </script>
   <style>
@@ -33,34 +35,34 @@
     <!-- Hero Banner -->
     <section class="army-gold text-black text-center rounded-2xl p-10 shadow-lg mb-10">
       <h2 class="text-4xl font-bold mb-4">Authorized Military Leave Assistance</h2>
-      <p class="text-lg mb-6">This portal supports verified applications for U.S. Army spouse and family leave.</p>
-      <a href="#application" class="bg-black text-army-gold font-semibold py-2 px-6 rounded-lg hover:bg-gray-900 transition">Start Application</a>
+      <p class="text-lg mb-6">This portal supports verified applications for U.S. Army spouse and relationship-based leave.</p>
+      <a href="#application" class="bg-black text-white font-semibold py-2 px-6 rounded-lg hover:bg-gray-900 transition inline-block">Start Application</a>
     </section>
 
     <!-- Accordion Section -->
     <section class="space-y-6">
       <!-- Requirements -->
-      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('req')">
+      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('req', 'icon1')">
         <div class="flex justify-between items-center">
           <h3 class="text-xl font-semibold">Requirements</h3>
-          <span class="text-army-gold">Click to expand</span>
+          <span class="text-army-gold text-lg" id="icon1">▼</span>
         </div>
         <div id="req" class="hidden mt-4 text-gray-700">
           <ul class="list-disc ml-5 space-y-1">
-            <li>Applicant must be the legal spouse of active-duty Army personnel</li>
-            <li>Valid marriage certificate</li>
+            <li>Applicant must be the legal spouse <strong>or</strong> long-term partner of active-duty Army personnel</li>
+            <li>Valid marriage certificate <em>or</em> proof of relationship (photos, communication history, etc.)</li>
             <li>Military ID or verification of soldier’s active status</li>
             <li>Brief statement explaining the leave request</li>
-            <li><strong>Note:</strong> At this time, non-married partners may not qualify. Please consult a commanding officer for guidance.</li>
+            <li><strong>Note:</strong> Non-married partners are accepted for leave support based on commanding officer discretion.</li>
           </ul>
         </div>
       </div>
 
       <!-- Pricing -->
-      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('price')">
+      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('price', 'icon2')">
         <div class="flex justify-between items-center">
           <h3 class="text-xl font-semibold">Processing Fee</h3>
-          <span class="text-army-gold">Click to expand</span>
+          <span class="text-army-gold text-lg" id="icon2">▼</span>
         </div>
         <div id="price" class="hidden mt-4 text-gray-700">
           <p class="mb-2">The official document verification and support fee is <strong>$195</strong>. This includes:</p>
@@ -73,15 +75,15 @@
       </div>
 
       <!-- Guide -->
-      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('guide')">
+      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('guide', 'icon3')">
         <div class="flex justify-between items-center">
           <h3 class="text-xl font-semibold">Application Steps</h3>
-          <span class="text-army-gold">Click to expand</span>
+          <span class="text-army-gold text-lg" id="icon3">▼</span>
         </div>
         <div id="guide" class="hidden mt-4 text-gray-700">
           <ol class="list-decimal ml-5 space-y-1">
             <li>Enter personal and soldier details</li>
-            <li>Upload proof documents (passport, marriage certificate)</li>
+            <li>Upload proof documents (passport, marriage certificate or relationship proof)</li>
             <li>Submit request for review</li>
             <li>Receive confirmation and processing update via email</li>
           </ol>
@@ -102,13 +104,20 @@
         <label>Soldier’s Full Name & Rank
           <input name="rank" class="mt-1 p-3 w-full border border-army rounded-lg" type="text" required />
         </label>
+        <label>Relationship Type
+          <select name="relationship" class="mt-1 p-3 w-full border border-army rounded-lg" required>
+            <option value="Married">Married</option>
+            <option value="Dating">Dating</option>
+            <option value="Fiancé(e)">Fiancé(e)</option>
+          </select>
+        </label>
         <label>Reason for Leave
           <textarea name="reason" class="mt-1 p-3 w-full border border-army rounded-lg" rows="4" required></textarea>
         </label>
         <label>Upload Supporting Documents
           <input name="docs" class="mt-1 p-3 w-full border border-army rounded-lg" type="file" accept=".pdf,.jpg,.png" required />
         </label>
-        <button type="submit" class="army-gold text-black font-semibold py-3 px-6 rounded-lg hover:bg-yellow-500 transition">Submit Request</button>
+        <button type="submit" class="bg-black text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-900 transition">Submit Request</button>
       </form>
     </section>
 
@@ -121,7 +130,7 @@
   </main>
 
   <footer class="bg-black text-army-gold text-sm py-6 mt-10 text-center">
-    <p>&copy; 2025 United States Army. All rights reserved. | Official Leave Management Division</p>
+    <p class="text-army-gold">&copy; 2025 United States Army. All rights reserved. | Official Leave Management Division</p>
   </footer>
 </body>
 </html>
