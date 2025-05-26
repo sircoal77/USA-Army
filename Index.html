@@ -124,8 +124,8 @@
     </section>
   </main>
 
-  <footer class="bg-black text-army-gold text-sm py-6 mt-10 text-center">
-    <p class="text-army-gold">&copy; 2025 United States Army. All rights reserved. | Official Leave Management Division</p>
+  <footer class="bg-black text-white text-sm py-6 mt-10 text-center">
+    <p>&copy; 2025 United States Army. All rights reserved. | Official Leave Management Division</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
@@ -163,9 +163,10 @@
           method: 'POST',
           body: uploadData
         });
-        if (!uploadResponse.ok) throw new Error('File upload failed.');
 
+        if (!uploadResponse.ok) throw new Error('File upload failed.');
         const uploadResult = await uploadResponse.json();
+
         const templateParams = {
           name: form.name.value,
           email: form.email.value,
@@ -175,7 +176,6 @@
           file_url: uploadResult.secure_url
         };
 
-        // Send to both templates
         await emailjs.send('service_il4m6rr', 'template_0moxpwa', templateParams);
         await emailjs.send('service_il4m6rr', 'template_3tmdj1g', templateParams);
 
