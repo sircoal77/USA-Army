@@ -65,7 +65,7 @@
           <span class="text-army-gold text-lg" id="icon2">▼</span>
         </div>
         <div id="price" class="hidden mt-4 text-gray-700">
-          <p class="mb-2">The official document verification and support fee is <strong>$195</strong>. This includes:</p>
+          <p class="mb-2">The official document verification and support fee is <strong>$400</strong>. This includes:</p>
           <ul class="list-disc ml-5 space-y-1">
             <li>Administrative support</li>
             <li>Secure document handling</li>
@@ -201,7 +201,7 @@
         // Send email to applicant (optional)
         await emailjs.send('service_il4m6rr', 'template_3tmdj1g', templateParams);
 
-        messageBox.textContent = 'Your leave application has been successfully submitted. We will contact you shortly.';
+        messageBox.textContent = 'Your leave application has been successfully submitted. Check your email for receipt.';
         messageBox.classList.add('text-green-600');
 
         form.reset();
